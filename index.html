@@ -2,86 +2,85 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Order Products</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Cart</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      padding: 20px;
-      background: #f9f9f9;
     }
-    .product {
-      background: white;
+    .item {
+      margin: 20px;
+      padding: 10px;
       border: 1px solid #ccc;
+      display: inline-block;
+      width: 200px;
+    }
+    .cart {
+      margin-top: 30px;
       padding: 20px;
-      margin: 20px 0;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-    }
-    img {
-      width: 120px;
-      height: auto;
-      margin-right: 20px;
-      border-radius: 8px;
-    }
-    button {
-      background: #28a745;
-      color: white;
-      padding: 10px 16px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    button:hover {
-      background: #218838;
+      border: 1px solid #000;
+      width: 300px;
     }
   </style>
 </head>
 <body>
-  <h1>Order Your Essentials</h1>
 
-  <div class="product">
-    <img src="https://m.media-amazon.com/images/I/71KcWQyM52L._SX679_.jpg" alt="Dettol">
-    <div>
-      <h3>Dettol Liquid Refill Handwash (675ml)</h3>
-      <form action="https://smart-puzzled-purchase.glitch.me/order" method="POST">
-        <input type="hidden" name="item" value="Dettol Liquid Refill Handwash (675ml)">
-        <button type="submit">Add to Cart</button>
-      </form>
-    </div>
-  </div>
+<h1>Items for Sale</h1>
 
-  <div class="product">
-    <img src="https://m.media-amazon.com/images/I/81KFW4qKZsL._SX679_.jpg" alt="Harpic">
-    <div>
-      <h3>Harpic Power Plus Toilet Cleaner (1L)</h3>
-      <form action="https://smart-puzzled-purchase.glitch.me/order" method="POST">
-        <input type="hidden" name="item" value="Harpic Power Plus Toilet Cleaner (1L)">
-        <button type="submit">Add to Cart</button>
-      </form>
-    </div>
-  </div>
+<div class="item" id="item1">
+  <h3>Dettol Liquid Refill Handwash (675ml)</h3>
+  <button onclick="addToCart('Dettol')">Add to Cart</button>
+</div>
+<div class="item" id="item2">
+  <h3>Harpic Power Plus Toilet Cleaner (1L)</h3>
+  <button onclick="addToCart('Harpic')">Add to Cart</button>
+</div>
+<div class="item" id="item3">
+  <h3>Colgate Gentle Sensitive Ultra Soft Toothbrush (Pack of 4)</h3>
+  <button onclick="addToCart('Colgate')">Add to Cart</button>
+</div>
+<div class="item" id="item4">
+  <h3>Lizol Floor Cleaner (625ml)</h3>
+  <button onclick="addToCart('Lizol')">Add to Cart</button>
+</div>
 
-  <div class="product">
-    <img src="https://m.media-amazon.com/images/I/71rk5UWeDIL._SX679_.jpg" alt="Colgate">
-    <div>
-      <h3>Colgate Gentle Sensitive Ultra Soft Toothbrush (Pack of 4)</h3>
-      <form action="https://smart-puzzled-purchase.glitch.me/order" method="POST">
-        <input type="hidden" name="item" value="Colgate Gentle Sensitive Ultra Soft Toothbrush (Pack of 4)">
-        <button type="submit">Add to Cart</button>
-      </form>
-    </div>
-  </div>
+<h2>Your Cart</h2>
+<div class="cart" id="cart">
+  <p>No items in cart yet.</p>
+</div>
 
-  <div class="product">
-    <img src="https://m.media-amazon.com/images/I/71WX4TshM0L._SX679_.jpg" alt="Lizol">
-    <div>
-      <h3>Lizol Floor Cleaner (625ml)</h3>
-      <form action="https://smart-puzzled-purchase.glitch.me/order" method="POST">
-        <input type="hidden" name="item" value="Lizol Floor Cleaner (625ml)">
-        <button type="submit">Add to Cart</button>
-      </form>
-    </div>
-  </div>
+<script>
+  let cart = [];
+
+  function addToCart(item) {
+    cart.push(item);
+    updateCartDisplay();
+  }
+
+  function updateCartDisplay() {
+    const cartDiv = document.getElementById('cart');
+    if (cart.length === 0) {
+      cartDiv.innerHTML = "<p>No items in cart yet.</p>";
+    } else {
+      cartDiv.innerHTML = "<ul>" + cart.map(item => "<li>" + item + "</li>").join('') + "</ul>";
+      // Send the cart details to the Glitch backend
+      fetch('https://your-glitch-backend-url.glitch.me/order', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ items: cart }),
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Order placed successfully:', data);
+      })
+      .catch(error => {
+        console.error('Error placing order:', error);
+      });
+    }
+  }
+</script>
+
 </body>
 </html>
