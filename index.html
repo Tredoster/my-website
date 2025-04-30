@@ -1,205 +1,282 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shopping Cart</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
-            padding: 20px;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Shop</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f2f2f2;
+    }
 
-        h1 {
-            text-align: center;
-            color: #333;
-        }
+    header {
+      background-color: #007bff;
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-        .container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 20px;
-            justify-content: center;
-            margin-top: 20px;
-        }
+    header h1 {
+      margin: 0;
+      font-size: 22px;
+    }
 
-        .item {
-            background-color: white;
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-        }
+    .search-filter {
+      display: flex;
+      gap: 10px;
+      padding: 15px 30px;
+      background: white;
+    }
 
-        .item img {
-            width: 150px;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 8px;
-        }
+    .search-filter input, .search-filter select {
+      padding: 8px;
+      font-size: 14px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      flex: 1;
+    }
 
-        .item h3 {
-            margin: 10px 0;
-        }
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 20px;
+      padding: 20px 30px;
+    }
 
-        .item button {
-            margin-top: 10px;
-            padding: 10px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-            border-radius: 5px;
-        }
+    .item {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      padding: 15px;
+      text-align: center;
+      transition: transform 0.2s ease;
+    }
 
-        .item button:hover {
-            background-color: #45a049;
-        }
+    .item:hover {
+      transform: translateY(-5px);
+    }
 
-        .cart {
-            margin-top: 30px;
-            text-align: center;
-        }
+    .item img {
+      height: 140px;
+      object-fit: contain;
+      width: 100%;
+      margin-bottom: 10px;
+    }
 
-        .cart h2 {
-            font-size: 24px;
-            margin-bottom: 10px;
-        }
+    .item h3 {
+      font-size: 16px;
+      color: #333;
+      margin-bottom: 8px;
+      height: 50px;
+      overflow: hidden;
+    }
 
-        .cart ul {
-            list-style-type: none;
-            padding: 0;
-        }
+    .controls {
+      margin-top: 10px;
+    }
 
-        .cart li {
-            background-color: #ffffff;
-            margin: 10px 0;
-            padding: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 5px;
-        }
+    .controls button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
 
-        .cart li div {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+    .quantity-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
 
-        .cart li button {
-            padding: 5px 10px;
-            background-color: #FF6347;
-            color: white;
-            border: none;
-            font-size: 16px;
-            cursor: pointer;
-            border-radius: 5px;
-        }
+    .quantity-controls button {
+      padding: 4px 10px;
+      font-size: 16px;
+    }
 
-        .checkout {
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #FF6347;
-            color: white;
-            border: none;
-            font-size: 18px;
-            cursor: pointer;
-            border-radius: 5px;
-        }
+    .bottom-bar {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #007bff;
+      color: white;
+      padding: 15px 30px;
+      text-align: right;
+      box-shadow: 0 -2px 8px rgba(0,0,0,0.15);
+    }
 
-        .checkout:hover {
-            background-color: #e5533f;
-        }
+    .bottom-bar button {
+      background: white;
+      color: #007bff;
+      padding: 10px 20px;
+      font-weight: bold;
+      border-radius: 6px;
+      border: none;
+    }
 
-    </style>
+    @media (max-width: 600px) {
+      .item h3 {
+        font-size: 14px;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<h1>Welcome to the Shopping Cart</h1>
+<header>
+  <h1>🛒 My Store</h1>
+</header>
 
-<div class="container">
-    <div class="item">
-        <img src="https://m.media-amazon.com/images/I/51gXqEXrAEL._AC_UF1000,1000_QL80_.jpg" alt="Dettol Liquid Refill Handwash">
-        <h3>Dettol Liquid Refill Handwash (675ml)</h3>
-        <button onclick="addToCart('Dettol Liquid Refill Handwash (675ml)')">Add to Cart</button>
-    </div>
-    <div class="item">
-        <img src="https://m.media-amazon.com/images/I/61fQA+kazoL.jpg" alt="Harpic Power Plus Toilet Cleaner (1L)">
-        <h3>Harpic Power Plus Toilet Cleaner (1L)</h3>
-        <button onclick="addToCart('Harpic Power Plus Toilet Cleaner (1L)')">Add to Cart</button>
-    </div>
-    <div class="item">
-        <img src="https://rukminim2.flixcart.com/image/850/1000/l01blow0/toothbrush/x/s/e/sensitive-soft-bristles-4-pcs-1-colgate-ultra-soft-original-imagbwthrqebzxjh.jpeg?q=90&crop=false" alt="Colgate Toothbrush">
-        <h3>Colgate Toothbrush</h3>
-        <button onclick="addToCart('Colgate Toothbrush')">Add to Cart</button>
-    </div>
-    <div class="item">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1BTyBQ0jgYNDeYEWQlFdmOSRMc6OAVech1w&s" alt="Lizol Floor Cleaner">
-        <h3>Lizol Floor Cleaner (625ml)</h3>
-        <button onclick="addToCart('Lizol Floor Cleaner (625ml)')">Add to Cart</button>
-    </div>
+<div class="search-filter">
+  <input type="text" placeholder="Search..." oninput="filterItems()" id="searchBox">
+  <select onchange="filterItems()" id="categoryFilter">
+    <option value="All">All Categories</option>
+    <option value="Dishwash Liquids">Dishwash Liquids</option>
+    <option value="Floor Cleaners">Floor Cleaners</option>
+    <option value="Toilet Cleaners">Toilet Cleaners</option>
+    <option value="Oral Care">Oral Care</option>
+  </select>
 </div>
 
-<div class="cart">
-    <h2>Your Cart</h2>
-    <ul id="cartItems">
-        <!-- Items will be added here -->
-    </ul>
-    <button class="checkout" onclick="placeOrder()">Place Order</button>
+<div class="container" id="productList">
+  <!-- Items will be rendered here -->
+</div>
+
+<div class="bottom-bar" id="cartBar">
+  <span>Items in cart</span>
+  <button onclick="placeOrder()">Place Order</button>
 </div>
 
 <script>
-    var cart = {};
-
-    function addToCart(item) {
-        // If the item already exists in the cart, increase its quantity
-        if (cart[item]) {
-            cart[item].quantity++;
-        } else {
-            // Otherwise, add it to the cart with quantity 1
-            cart[item] = { quantity: 1 };
-        }
-        displayCart();
+  const products = [
+    {
+      name: "Dettol Liquid Refill Handwash (675ml)",
+      category: "Dishwash Liquids",
+      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThY8kwVcYG-76c9t8BiS5rEPJHuq3xOy0rqA&s"
+    },
+    {
+      name: "Harpic Power Plus Toilet Cleaner (1L)",
+      category: "Toilet Cleaners",
+      img: "https://m.media-amazon.com/images/I/61fQA+kazoL.jpg"
+    },
+    {
+      name: "Colgate Toothbrush (Pack of 4)",
+      category: "Oral Care",
+      img: "https://rukminim2.flixcart.com/image/850/1000/l01blow0/toothbrush/x/s/e/sensitive-soft-bristles-4-pcs-1-colgate-ultra-soft-original-imagbwthrqebzxjh.jpeg?q=90&crop=false"
+    },
+    {
+      name: "Lizol Floor Cleaner (625ml)",
+      category: "Floor Cleaners",
+      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1BTyBQ0jgYNDeYEWQlFdmOSRMc6OAVech1w&s"
     }
+  ];
 
-    function displayCart() {
-        var cartItems = document.getElementById('cartItems');
-        cartItems.innerHTML = '';
-        for (var item in cart) {
-            var li = document.createElement('li');
-            li.innerHTML = `
-                <div>
-                    <span>${item} (x${cart[item].quantity})</span>
-                    <div>
-                        <button onclick="changeQuantity('${item}', -1)">-</button>
-                        <button onclick="changeQuantity('${item}', 1)">+</button>
-                    </div>
-                </div>
-            `;
-            cartItems.appendChild(li);
-        }
-    }
+  const cart = {};
 
-    function changeQuantity(item, change) {
-        if (cart[item]) {
-            cart[item].quantity += change;
-            if (cart[item].quantity <= 0) {
-                delete cart[item];
-            }
-            displayCart();
-        }
-    }
+  function renderItems() {
+    const search = document.getElementById('searchBox').value.toLowerCase();
+    const category = document.getElementById('categoryFilter').value;
+    const list = document.getElementById('productList');
+    list.innerHTML = '';
 
-    function placeOrder() {
-        if (Object.keys(cart).length > 0) {
-            alert('Your order has been placed successfully!');
-            cart = {}; // Clear cart
-            displayCart(); // Update cart display
-        } else {
-            alert('Your cart is empty. Please add items to the cart before placing an order.');
-        }
+    products.forEach((product, index) => {
+      if ((category === "All" || product.category === category) &&
+          product.name.toLowerCase().includes(search)) {
+
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'item';
+        itemDiv.innerHTML = `
+          <img src="${product.img}" alt="${product.name}">
+          <h3>${product.name}</h3>
+          <div class="controls" id="controls-${index}">
+            <button onclick="addToCart('${index}')">Add to Cart</button>
+          </div>
+        `;
+        list.appendChild(itemDiv);
+      }
+    });
+  }
+
+  function addToCart(index) {
+    const name = products[index].name;
+    if (!cart[name]) {
+      cart[name] = { quantity: 1 };
+      document.getElementById('cartBar').style.display = 'block';
+    } else {
+      cart[name].quantity++;
     }
+    updateControls(index);
+  }
+
+  function changeQuantity(index, delta) {
+    const name = products[index].name;
+    if (cart[name]) {
+      cart[name].quantity += delta;
+      if (cart[name].quantity <= 0) {
+        delete cart[name];
+      }
+      updateControls(index);
+    }
+    if (Object.keys(cart).length === 0) {
+      document.getElementById('cartBar').style.display = 'none';
+    }
+  }
+
+  function updateControls(index) {
+    const name = products[index].name;
+    const controls = document.getElementById(`controls-${index}`);
+    if (cart[name]) {
+      controls.innerHTML = `
+        <div class="quantity-controls">
+          <button onclick="changeQuantity('${index}', -1)">-</button>
+          <span>${cart[name].quantity}</span>
+          <button onclick="changeQuantity('${index}', 1)">+</button>
+        </div>
+      `;
+    } else {
+      controls.innerHTML = `<button onclick="addToCart('${index}')">Add to Cart</button>`;
+    }
+  }
+
+  function filterItems() {
+    renderItems();
+    products.forEach((_, idx) => updateControls(idx));
+  }
+
+  function placeOrder() {
+    if (Object.keys(cart).length > 0) {
+      fetch('https://smart-puzzled-purchase.glitch.me/place-order', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(cart)
+      })
+      .then(response => response.json())
+      .then(data => {
+        alert('Your order has been placed!');
+        for (let key in cart) delete cart[key];
+        renderItems();
+        document.getElementById('cartBar').style.display = 'none';
+      })
+      .catch(err => {
+        alert('Failed to place order.');
+        console.error(err);
+      });
+    } else {
+      alert('Your cart is empty.');
+    }
+  }
+
+  renderItems();
 </script>
 
 </body>
