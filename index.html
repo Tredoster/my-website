@@ -2,36 +2,33 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Product List</title>
+  <title>Order Products</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       padding: 20px;
-      background: #f0f0f0;
+      background: #f9f9f9;
     }
     .product {
       background: white;
-      border: 1px solid #ddd;
-      border-radius: 10px;
+      border: 1px solid #ccc;
       padding: 20px;
       margin: 20px 0;
+      border-radius: 10px;
       display: flex;
       align-items: center;
     }
-    .product img {
+    img {
       width: 120px;
       height: auto;
       margin-right: 20px;
       border-radius: 8px;
     }
-    .product-info {
-      flex: 1;
-    }
     button {
       background: #28a745;
       color: white;
+      padding: 10px 16px;
       border: none;
-      padding: 10px 20px;
       border-radius: 5px;
       cursor: pointer;
     }
@@ -41,12 +38,11 @@
   </style>
 </head>
 <body>
-
-  <h1>Available Items</h1>
+  <h1>Order Your Essentials</h1>
 
   <div class="product">
-    <img src="https://m.media-amazon.com/images/I/71KcWQyM52L._SX679_.jpg" alt="Dettol Handwash">
-    <div class="product-info">
+    <img src="https://m.media-amazon.com/images/I/71KcWQyM52L._SX679_.jpg" alt="Dettol">
+    <div>
       <h3>Dettol Liquid Refill Handwash (675ml)</h3>
       <form action="https://smart-puzzled-purchase.glitch.me/order" method="POST">
         <input type="hidden" name="item" value="Dettol Liquid Refill Handwash (675ml)">
@@ -56,8 +52,8 @@
   </div>
 
   <div class="product">
-    <img src="https://m.media-amazon.com/images/I/81KFW4qKZsL._SX679_.jpg" alt="Harpic Toilet Cleaner">
-    <div class="product-info">
+    <img src="https://m.media-amazon.com/images/I/81KFW4qKZsL._SX679_.jpg" alt="Harpic">
+    <div>
       <h3>Harpic Power Plus Toilet Cleaner (1L)</h3>
       <form action="https://smart-puzzled-purchase.glitch.me/order" method="POST">
         <input type="hidden" name="item" value="Harpic Power Plus Toilet Cleaner (1L)">
@@ -67,8 +63,8 @@
   </div>
 
   <div class="product">
-    <img src="https://m.media-amazon.com/images/I/71rk5UWeDIL._SX679_.jpg" alt="Colgate Toothbrush">
-    <div class="product-info">
+    <img src="https://m.media-amazon.com/images/I/71rk5UWeDIL._SX679_.jpg" alt="Colgate">
+    <div>
       <h3>Colgate Gentle Sensitive Ultra Soft Toothbrush (Pack of 4)</h3>
       <form action="https://smart-puzzled-purchase.glitch.me/order" method="POST">
         <input type="hidden" name="item" value="Colgate Gentle Sensitive Ultra Soft Toothbrush (Pack of 4)">
@@ -78,8 +74,8 @@
   </div>
 
   <div class="product">
-    <img src="https://m.media-amazon.com/images/I/71WX4TshM0L._SX679_.jpg" alt="Lizol Floor Cleaner">
-    <div class="product-info">
+    <img src="https://m.media-amazon.com/images/I/71WX4TshM0L._SX679_.jpg" alt="Lizol">
+    <div>
       <h3>Lizol Floor Cleaner (625ml)</h3>
       <form action="https://smart-puzzled-purchase.glitch.me/order" method="POST">
         <input type="hidden" name="item" value="Lizol Floor Cleaner (625ml)">
@@ -87,6 +83,5 @@
       </form>
     </div>
   </div>
-
 </body>
 </html>
