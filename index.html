@@ -2,111 +2,91 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Product Catalog</title>
+  <title>Product List</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #f7f7f7;
-      text-align: center;
+      padding: 20px;
+      background: #f0f0f0;
     }
     .product {
-      border: 1px solid #ccc;
+      background: white;
+      border: 1px solid #ddd;
       border-radius: 10px;
-      background-color: #fff;
       padding: 20px;
-      margin: 20px auto;
-      width: 300px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      margin: 20px 0;
+      display: flex;
+      align-items: center;
     }
     .product img {
-      width: 100px;
-      height: 100px;
+      width: 120px;
+      height: auto;
+      margin-right: 20px;
+      border-radius: 8px;
     }
-    .product h3 {
-      margin: 10px 0;
+    .product-info {
+      flex: 1;
     }
-    .product button {
-      padding: 10px 15px;
-      margin-top: 10px;
+    button {
+      background: #28a745;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
       cursor: pointer;
     }
-    #cart {
-      margin-top: 30px;
-    }
-    #cart ul {
-      list-style-type: none;
-      padding: 0;
+    button:hover {
+      background: #218838;
     }
   </style>
 </head>
 <body>
 
-  <h1>Product Catalog</h1>
+  <h1>Available Items</h1>
 
   <div class="product">
-    <h3>Dettol Liquid Refill Handwash (675ml)</h3>
-    <img src="https://m.media-amazon.com/images/I/71qZc6xYkqL._SL1500_.jpg" alt="Dettol Handwash">
-    <br>
-    <button onclick="addToCart('Dettol Liquid Refill Handwash (675ml)')">Add to Cart</button>
-  </div>
-
-  <div class="product">
-    <h3>Harpic Power Plus Toilet Cleaner (1L)</h3>
-    <img src="https://m.media-amazon.com/images/I/61Xg2R4A6zL._SL1500_.jpg" alt="Harpic Toilet Cleaner">
-    <br>
-    <button onclick="addToCart('Harpic Power Plus Toilet Cleaner (1L)')">Add to Cart</button>
+    <img src="https://m.media-amazon.com/images/I/71KcWQyM52L._SX679_.jpg" alt="Dettol Handwash">
+    <div class="product-info">
+      <h3>Dettol Liquid Refill Handwash (675ml)</h3>
+      <form action="https://smart-puzzled-purchase.glitch.me/order" method="POST">
+        <input type="hidden" name="item" value="Dettol Liquid Refill Handwash (675ml)">
+        <button type="submit">Add to Cart</button>
+      </form>
+    </div>
   </div>
 
   <div class="product">
-    <h3>Colgate Gentle Sensitive Ultra Soft Toothbrush (Pack of 4)</h3>
-    <img src="https://m.media-amazon.com/images/I/71s7VYQO2lL._SL1500_.jpg" alt="Colgate Toothbrush">
-    <br>
-    <button onclick="addToCart('Colgate Gentle Sensitive Ultra Soft Toothbrush (Pack of 4)')">Add to Cart</button>
+    <img src="https://m.media-amazon.com/images/I/81KFW4qKZsL._SX679_.jpg" alt="Harpic Toilet Cleaner">
+    <div class="product-info">
+      <h3>Harpic Power Plus Toilet Cleaner (1L)</h3>
+      <form action="https://smart-puzzled-purchase.glitch.me/order" method="POST">
+        <input type="hidden" name="item" value="Harpic Power Plus Toilet Cleaner (1L)">
+        <button type="submit">Add to Cart</button>
+      </form>
+    </div>
   </div>
 
   <div class="product">
-    <h3>Lizol Floor Cleaner (625ml)</h3>
-    <img src="https://m.media-amazon.com/images/I/61FJY3c9qSL._SL1500_.jpg" alt="Lizol Floor Cleaner">
-    <br>
-    <button onclick="addToCart('Lizol Floor Cleaner (625ml)')">Add to Cart</button>
+    <img src="https://m.media-amazon.com/images/I/71rk5UWeDIL._SX679_.jpg" alt="Colgate Toothbrush">
+    <div class="product-info">
+      <h3>Colgate Gentle Sensitive Ultra Soft Toothbrush (Pack of 4)</h3>
+      <form action="https://smart-puzzled-purchase.glitch.me/order" method="POST">
+        <input type="hidden" name="item" value="Colgate Gentle Sensitive Ultra Soft Toothbrush (Pack of 4)">
+        <button type="submit">Add to Cart</button>
+      </form>
+    </div>
   </div>
 
-  <div id="cart">
-    <h2>Cart</h2>
-    <ul id="cartList"></ul>
-    <button onclick="placeOrder()">Place Order</button>
+  <div class="product">
+    <img src="https://m.media-amazon.com/images/I/71WX4TshM0L._SX679_.jpg" alt="Lizol Floor Cleaner">
+    <div class="product-info">
+      <h3>Lizol Floor Cleaner (625ml)</h3>
+      <form action="https://smart-puzzled-purchase.glitch.me/order" method="POST">
+        <input type="hidden" name="item" value="Lizol Floor Cleaner (625ml)">
+        <button type="submit">Add to Cart</button>
+      </form>
+    </div>
   </div>
-
-  <script>
-    const cart = [];
-
-    function addToCart(item) {
-      cart.push(item);
-      updateCart();
-    }
-
-    function updateCart() {
-      const cartList = document.getElementById('cartList');
-      cartList.innerHTML = '';
-      cart.forEach((item) => {
-        const li = document.createElement('li');
-        li.textContent = item;
-        cartList.appendChild(li);
-      });
-    }
-
-    function placeOrder() {
-      if (cart.length === 0) {
-        alert('Your cart is empty!');
-      } else {
-        alert('Order placed for: ' + cart.join(', '));
-        // Simulate notifying you
-        console.log('User ordered:', cart);
-        cart.length = 0;
-        updateCart();
-      }
-    }
-  </script>
 
 </body>
 </html>
